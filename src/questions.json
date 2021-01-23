@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "Question": "What links these?",
+        "Clues": [
+            "Scuba",
+            "Smart",
+            "Taser",
+            "Laser",
+            "Pin",
+            "Seal",
+            "Kiss",
+            "Sonar",
+            "Captcha",
+            "Who?",
+            "Wasp",
+            "Rip"
+        ],
+        "Answer": "Acronyms"
+    },
+    {
+        "id": 2,
+        "Question": "What links these?",
+        "Clues": [
+            "Atom",
+            "Peck",
+            "Hobbit",
+            "League",
+            "A lot",
+            "Spat",
+            "Rod",
+            "Faggot",
+            "Poncelet",
+            "Cable",
+            "Chain",
+            "Butt"
+        ],
+        "Answer": "Obsolete units of measurement"
+    },
+    {
+        "id": 3,
+        "Question": "What links these?",
+        "Clues": [
+            "Hot",
+            "Bubble",
+            "Foot",
+            "Eye",
+            "Public",
+            "Mats",
+            "Robe",
+            "House",
+            "Blood",
+            "Plug",
+            "Bird",
+            "Mud"
+        ],
+        "Answer": "Baths"
+    },
+    {
+        "id": 4,
+        "Question": "What links these?",
+        "Clues": [
+            "American",
+            "Humble",
+            "Cottage",
+            "Pumpkin",
+            "Mud",
+            "Lemon",
+            "Ocean",
+            "Cheese",
+            "Fish",
+            "Pecan",
+            "Sweet Potato",
+            "Funeral"
+        ],
+        "Answer": "Types of Pie"
+    },
+    {
+        "id": 5,
+        "Question": "What links these?",
+        "Clues": [
+            "Azerbaijan",
+            "Belarus",
+            "China",
+            "Estonia",
+            "Finland",
+            "Georgia",
+            "Kazakhstan",
+            "North Korea",
+            "Latvia",
+            "Lithuania",
+            "Mongolia",
+            "Norway",
+            "Poland",
+            "Ukraine"
+        ],
+        "Answer": "Types of Pie"
+    },
+    {
+        "id": 6,
+        "Question": "What links these?",
+        "Clues": [
+            "Rot",
+            "Note",
+            "Fall",
+            "Rest",
+            "Hills",
+            "Patrol",
+            "Loose",
+            "Stool",
+            "Wear",
+            "Path",
+            "Print",
+            "Ball"
+        ],
+        "Answer": "Foot"
+    },
+    {
+        "id": 7,
+        "Question": "What links these?",
+        "Clues": [
+            "Craft",
+            "Wall",
+            "Recycled",
+            "News",
+            "Sand",
+            "Wrapping",
+            "Litmus",
+            "Filter",
+            "Blotting",
+            "Note",
+            "Toilet",
+            "Waste"
+        ],
+        "Answer": "Paper"
+    }
+]
