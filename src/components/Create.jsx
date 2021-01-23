@@ -2,6 +2,7 @@ import React from "react"
 import { Form, Input, Button, Col, Row, Modal } from "antd"
 import { DeleteOutlined, PlusOutlined, CheckCircleOutlined } from '@ant-design/icons';
 import { compressToEncodedURIComponent as lzEncode } from 'lz-string'
+import GoogleForm from 'google-form-send'
 
 const FormList = ({ FormItem, AddButton }) => (
     <Form.List name="clues">
@@ -19,6 +20,17 @@ const FormList = ({ FormItem, AddButton }) => (
 )
 
 const onFinish = (fields) => {
+
+    try {
+        const form = new GoogleForm('https://docs.google.com/forms/d/e/1FAIpQLScqzG86l-Cp1LhTFcH_3qhIRMKCNeLglR1tXd6NbRH8bd55Iw')
+
+        form.addField('entry.1329122340', JSON.stringify(fields))
+
+        form.send()
+    } catch (error) {
+        // this always errors but google does save the answer
+    }
+
     const encoded = lzEncode(JSON.stringify(fields))
 
     console.log(fields)
@@ -29,7 +41,7 @@ const onFinish = (fields) => {
         content: (
             <div>
                 <p>Open this link to play the game</p>
-                <a target='_blank' href={gameUrl}>{gameUrl}</a>
+                <a target='_blank' rel="noreferrer" href={gameUrl}>{gameUrl}</a>
             </div>
         ),
         icon: <CheckCircleOutlined style={{ color: '#52c41a' }} />,

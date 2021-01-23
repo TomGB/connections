@@ -31,7 +31,7 @@ const App = () => (
         </Switch>
       </Content>
     </Router>
-    <Footer style={{ textAlign: 'center' }}>Connections ©2021 Created by <a target="_blank" href="https://github.com/tomgb/">Tom Banister</a></Footer>
+    <Footer style={{ textAlign: 'center' }}>Connections ©2021 Created by <a target="_blank" rel="noreferrer" href="https://github.com/tomgb/">Tom Banister</a></Footer>
   </Layout >
 )
 
