@@ -93,7 +93,7 @@ const Create = () => (
             />
             <LabelAndInput>
                 <Form.Item>
-                    <Button type="primary" htmlType="submit">Start</Button>
+                    <Button type="primary" htmlType="submit">Generate</Button>
                 </Form.Item>
             </LabelAndInput>
         </Form>

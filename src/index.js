@@ -64,11 +64,13 @@ const Clues = ({ clues, setActiveQuestionIndex = null, activeQuestionIndex = nul
 
   return <>
     <div style={{ maxWidth: '800px', width: '100%' }}>
-      {rows.map((columns, rI) => <Row key={rI} gutter={[16, 16]}>{
-        columns.map(({ clue, index }) => <Col key={index} span={6}>
-          <Clue text={clue} index={index} show={shownClues[index]} setShow={setupShow(index)} />
-        </Col>)
-      }</Row>)}
+      <Row gutter={[16, 16]}>
+        {rows.map(columns => columns.map(({ clue, index }) => (
+          <Col key={index} sm={6} xs={8}>
+            <Clue text={clue} index={index} show={shownClues[index]} setShow={setupShow(index)} />
+          </Col>
+        )))}
+      </Row>
       <Space size={[8, 8]} wrap>
         <Button onClick={showAll}>Reveal All</Button>
         <Button onClick={hideAll}>Hide All</Button>
