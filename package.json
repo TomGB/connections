@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.10.3",
     "array-shuffle": "^2.0.0",
+    "pre-commit": "^1.2.2",
     "react": "^17.0.1",
     "react-card-flip": "^1.0.11",
     "react-dom": "^17.0.1",
@@ -21,6 +22,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "pre-commit": [
+    "build"
+  ],
   "eslintConfig": {
     "extends": [
       "react-app",
