@@ -10,10 +10,13 @@
     "antd": "^4.10.3",
     "array-shuffle": "^2.0.0",
     "gh-pages": "^3.1.0",
+    "lz-string": "^1.4.4",
     "react": "^17.0.1",
     "react-card-flip": "^1.0.11",
     "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-textfit": "^1.1.1",
     "split-array": "^1.0.1",
     "web-vitals": "^0.2.4"
   },

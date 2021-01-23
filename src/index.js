@@ -1,32 +1,38 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
-import { Button, Card, Col, DatePicker, message, Row } from 'antd';
+import { Button, Card, Col, Layout, Menu, message, Result, Row, Space } from 'antd';
+import { Route, Switch, HashRouter as Router, Link as NavLink } from 'react-router-dom'
+import { PlayCircleOutlined, EditOutlined } from '@ant-design/icons';
+import { Textfit } from 'react-textfit';
 import 'antd/dist/antd.css';
 import './index.css';
 import arrayShuffle from 'array-shuffle'
 import ReactCardFlip from 'react-card-flip';
+import splitArray from 'split-array'
+import { useParams } from 'react-router-dom'
+import { decompressFromEncodedURIComponent as lzDecode } from 'lz-string'
 
 import questions from './questions.json'
-import splitArray from 'split-array'
+import Create from './Create';
 
-console.log(questions)
+const { Footer, Content } = Layout;
 
 const Clue = ({ text, index, show, setShow }) => {
   return <ReactCardFlip isFlipped={show}>
     <Card
-      style={{ textAlign: 'center', fontSize: '30px' }}
+      style={{ textAlign: 'center', fontSize: '30px', height: '100px' }}
       bodyStyle={{ padding: '24px 0px', color: 'white', background: '#3a3d3e' }}
       onClick={() => setShow(true)}
     >{index + 1}</Card>
     <Card
-      style={{ textAlign: 'center', fontSize: '30px' }}
-      bodyStyle={{ padding: '24px 0px' }}
+      style={{ textAlign: 'center', height: '100px' }}
+      bodyStyle={{ padding: '5px', height: '100px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
       onClick={() => setShow(false)}
-    >{text}</Card>
-  </ReactCardFlip>
+    ><Textfit mode="single" max={30}>{text}</Textfit></Card>
+  </ReactCardFlip >
 }
 
-const Clues = ({ clues, setActiveQuestionIndex, activeQuestionIndex }) => {
+const Clues = ({ clues, setActiveQuestionIndex = null, activeQuestionIndex = null }) => {
   const [shownClues, setShownClues] = useState(Array.from({ length: 12 }, () => false))
 
   const setupShow = (index) => (shown) => {
@@ -40,8 +46,8 @@ const Clues = ({ clues, setActiveQuestionIndex, activeQuestionIndex }) => {
 
   const nextQuestion = async () => {
     setShownClues(Array.from({ length: 12 }, () => false))
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    if (activeQuestionIndex !== 0) {
+    await new Promise(resolve => setTimeout(resolve, 600))
+    if (activeQuestionIndex !== 0 && setActiveQuestionIndex) {
       setActiveQuestionIndex(activeQuestionIndex - 1)
     } else {
       message.success('That\'s all folks');
@@ -56,21 +62,23 @@ const Clues = ({ clues, setActiveQuestionIndex, activeQuestionIndex }) => {
     setShownClues(Array.from({ length: 12 }, () => true))
   }
 
-  return <div style={{ width: '800px', margin: 'auto' }}>
-    <div style={{ width: '800px' }}>{
-      rows.map(columns => <Row gutter={[16, 16]}>{
-        columns.map(({ clue, index }) => <Col span={6}>
+  return <>
+    <div style={{ maxWidth: '800px', width: '100%' }}>
+      {rows.map((columns, rI) => <Row key={rI} gutter={[16, 16]}>{
+        columns.map(({ clue, index }) => <Col key={index} span={6}>
           <Clue text={clue} index={index} show={shownClues[index]} setShow={setupShow(index)} />
         </Col>)
-      }</Row>)
-    }</div>
-    <Button onClick={showAll}>Reveal All</Button>
-    <Button onClick={hideAll}>Hide All</Button>
-    <Button onClick={nextQuestion}>Next Question</Button>
-  </div>
+      }</Row>)}
+      <Space size={[8, 8]} wrap>
+        <Button onClick={showAll}>Reveal All</Button>
+        <Button onClick={hideAll}>Hide All</Button>
+        <Button onClick={nextQuestion}>Next Question</Button>
+      </Space>
+    </div>
+  </>
 }
 
-const App = () => {
+const DefaultQuestions = () => {
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(questions.length - 1);
 
   console.log(activeQuestionIndex)
@@ -81,9 +89,58 @@ const App = () => {
     clues.pop()
   }
 
-  return <>
-    <Clues clues={clues} activeQuestionIndex={activeQuestionIndex} setActiveQuestionIndex={setActiveQuestionIndex} />
-  </>
+  return <Clues clues={clues} activeQuestionIndex={activeQuestionIndex} setActiveQuestionIndex={setActiveQuestionIndex} />
+}
+
+const UrlQuestions = () => {
+  const { encodedQuestion } = useParams()
+
+  let question
+
+  try {
+    question = JSON.parse(lzDecode(encodedQuestion))
+  } catch (error) {
+    console.log(error)
+    return <Result
+      status="error"
+      title="Sorry, the URL is invalid"
+      subTitle="Please check the URL has been copied correctly."
+      extra={<>
+        <NavLink to='/create' type="primary">
+          <Button type='primary'>Create a new question</Button>
+        </NavLink>
+        <NavLink to='/'><Button>Play sample questions</Button></NavLink>
+      </>}
+    />
+  }
+
+  const shuffledClues = arrayShuffle(question.clues)
+
+  return <Clues clues={shuffledClues} />
+}
+
+const App = () => {
+
+  return <Layout style={{ minHeight: "100vh" }}>
+    <Router>
+      <Menu theme="dark" mode="horizontal">
+        <Menu.Item icon={<EditOutlined />}><NavLink to='/create'>Create your own questions</NavLink></Menu.Item>
+        <Menu.Item icon={<PlayCircleOutlined />}><NavLink to='/'>Play example questions</NavLink></Menu.Item>
+      </Menu>
+      <Content style={{ maxWidth: '800px', width: '100%', margin: 'auto', marginTop: '100px' }}>
+        <Switch>
+          <Route exact path='/'>
+            <DefaultQuestions />
+          </Route>
+          <Route exact path='/create'><Create /></Route>
+          <Route path='/play/:encodedQuestion'>
+            <UrlQuestions />
+          </Route>
+        </Switch>
+      </Content>
+    </Router>
+    <Footer style={{ textAlign: 'center' }}>Connections ©2021 Created by <a target="_blank" href="https://github.com/tomgb/">Tom Banister</a></Footer>
+  </Layout >
 };
 
 render(<App />, document.getElementById('root'));
