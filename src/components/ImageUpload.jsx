@@ -4,8 +4,8 @@ import ImgCrop from "antd-img-crop"
 import React from "react"
 import uploadAction from "../utils/uploadAction"
 
-const imageWidth = 186
-const imageHeight = 100
+const imageWidth = 186 * 3
+const imageHeight = 100 * 3
 
 const ImageUpload = ({ setClue }) => (
     <ImgCrop

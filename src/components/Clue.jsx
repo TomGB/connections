@@ -33,7 +33,7 @@ const cardBodyStyle = {
 const Clue = ({ text, index, show, setShow }) => {
     const isImage = isUrl(text)
 
-    const image = isImage ? { backgroundImage: `url(${text})` } : {}
+    const image = isImage ? { backgroundImage: `url(${text})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}
     return (
         <ReactCardFlip isFlipped={show}>
             <Card

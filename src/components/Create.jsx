@@ -41,7 +41,7 @@ const clueInput = ({ form, setShowWarning, remove }) => (field, index) => {
             {isImage && (<LabelAndInput>
                 <img
                     src={value}
-                    style={{ paddingBottom: '10px' }}
+                    style={{ paddingBottom: '10px', width: '186px' }}
                     alt={`clue ${index + 1}`}
                 />
             </LabelAndInput>)}
@@ -62,7 +62,7 @@ const CluesInput = ({ form, setShowWarning }) => (
                             block icon={<PlusOutlined />}
                         >
                             Add Clue
-                                </Button>
+                        </Button>
                     </Form.Item>
                 </LabelAndInput>
             </>
