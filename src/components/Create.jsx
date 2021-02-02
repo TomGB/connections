@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Form, Input, Button, Col, Row } from "antd"
+import { Form, Input, Button, Col, Row, Radio } from "antd"
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import debounce from 'lodash.debounce'
 import { Prompt } from "react-router-dom";
@@ -102,6 +102,14 @@ const Create = () => {
                 <LabelAndInput label="Answer:">
                     <Form.Item name='answer'>
                         <Input placeholder="The connection" />
+                    </Form.Item>
+                </LabelAndInput>
+                <LabelAndInput label={'Order:'}>
+                    <Form.Item name='order'>
+                        <Radio.Group defaultValue='randomised'>
+                            <Radio value='randomised'>Randomised</Radio>
+                            <Radio value='sequential'>Sequential</Radio>
+                        </Radio.Group>
                     </Form.Item>
                 </LabelAndInput>
                 <CluesInput form={form} setShowWarning={setShowWarning} />

@@ -13,9 +13,14 @@ const generateQuiz = (fields) => {
         // this always errors but google does save the answer
     }
 
-    const encoded = lzEncode(JSON.stringify(fields))
+    if (fields.order === 'sequential') {
+        delete fields.order
+        fields.o = true
+    } else {
+        delete fields.order
+    }
 
-    console.log(fields)
+    const encoded = lzEncode(JSON.stringify(fields))
     const gameUrl = window.location.origin + process.env.PUBLIC_URL + '/#/play/' + encoded
 
     Modal.confirm({

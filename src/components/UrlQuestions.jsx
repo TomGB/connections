@@ -14,14 +14,19 @@ const UrlQuestions = () => {
     try {
         const question = JSON.parse(lzDecode(encodedQuestion))
 
-        const shuffledClues = arrayShuffle(question.clues)
+        let orderedClues
 
-
-        while (shuffledClues.length > 12) {
-            shuffledClues.pop()
+        if (!question.o) {
+            orderedClues = arrayShuffle(question.clues)
+        } else {
+            orderedClues = question.clues
         }
 
-        clues = shuffledClues
+        while (orderedClues.length > 12) {
+            orderedClues.pop()
+        }
+
+        clues = orderedClues
     } catch (error) {
         console.log(error)
         return <Result
